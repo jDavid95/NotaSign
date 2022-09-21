@@ -7,5 +7,9 @@ module.exports = () => {
 		res.render("login");
 	});
 
+	router.post("/", (req, res) => {
+		res.redirect("/");
+	});
+
 	return router;
 };
