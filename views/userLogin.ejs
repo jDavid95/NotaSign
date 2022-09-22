@@ -7,7 +7,7 @@
     <body>
         <header class="p-3 bg-dark text-white">
             <div class="container">
-                <div class="d-flex flex-wrap align-items-center justify-content-center ">
+                <nav class="d-flex flex-wrap align-items-center justify-content-center ">
 
                     <ul class="nav col-12 col-sm-auto me-sm-auto mb-2 justify-content-center mb-md-0">
                         <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
@@ -18,11 +18,11 @@
                         <a class="btn btn-info" href="/signup" role="button">Signup</a>
                     </div>
 
-                </div>
+                </nav>
             </div>
         </header>
 
-        <%- include ('./partials/loginAlerts.ejs') %>
+        <%- include ('./partials/userLoginAlerts.ejs') %>
         
         <div class="d-flex align-items-center h-100 mt-5">
             <div class="container h-100">
@@ -32,7 +32,7 @@
                             <div class="card-body p-5">
                                 <h2 class="text-uppercase text-center mb-5">User Login</h2>
 
-                                <form id="loginForm" method="post" action="/login">
+                                <form id="loginForm" method="post" action="/userLogin">
 
                                     <div class="form-outline mb-4">
                                         <input type="email" id="emailAddressLogin" name = "emailAddressLogin" class="form-control form-control-lg" />

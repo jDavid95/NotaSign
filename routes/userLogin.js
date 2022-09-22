@@ -1,15 +1,24 @@
 const express = require("express");
+const passport = require("passport");
 
 const router = express.Router();
 
 module.exports = () => {
-	router.get("/", (req, res) => {
-		res.render("userLogin");
+	router.get("/", redirectIfUserLoggedIn, redirectIfNotaryPublicLoggedIn, (req, res) => {
+		res.render("userLogin", { success: req.query.success });
 	});
 
-	router.post("/", (req, res) => {
-		res.redirect("/");
-	});
+	router.post("/", passport.authenticate("userLocal", { successRedirect: "/userDashboard", failureRedirect: "/userLogin?success=false" }));
 
 	return router;
+};
+
+function redirectIfUserLoggedIn(req, res, next) {
+	if (req.user) return res.redirect('/userDashboard');
+	return next();
+};
+
+function redirectIfNotaryPublicLoggedIn(req, res, next) {
+	if (req.notaryPublic) return res.redirect('/notaryPublicDashboard');
+	return next();
 };

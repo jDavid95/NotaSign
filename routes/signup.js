@@ -7,7 +7,7 @@ const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4}
 const nameRegex = /^[a-z ,.'-]+$/i;
 
 module.exports = () => {
-	router.get("/", (req, res) => {
+	router.get("/", redirectIfUserLoggedIn, redirectIfNotaryPublicLoggedIn, (req, res) => {
 		res.render("signup", { success: req.query.success });
 	});
 
@@ -67,7 +67,7 @@ module.exports = () => {
 				const savedUser = await newUser.save();
 
 				if (savedUser) {
-					 return res.redirect("/login?success=true");
+					 return res.redirect("/userLogin?success=true");
 				}
 
 				return next(new Error("Failed to save user for unknown reasons"));
@@ -86,9 +86,12 @@ module.exports = () => {
 function capitalizeFirstLetter(string) {
 	return string[0].toUpperCase() + string.slice(1).toLowerCase();
 }
-
-function redirectIfLoggedIn(req, res, next) {
-	if (req.user) return res.redirect('/');
+function redirectIfUserLoggedIn(req, res, next) {
+	if (req.user) return res.redirect('/userDashboard');
 	return next();
-}
+};
 
+function redirectIfNotaryPublicLoggedIn(req, res, next) {
+	if (req.notaryPublic) return res.redirect('/notaryPublicDashboard');
+	return next();
+};

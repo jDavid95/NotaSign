@@ -1,0 +1,21 @@
+<% if(success === "false") { %>
+    <div class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4">
+        <strong>Error!</strong> Email Address or Password is incorrect.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<% } %>
+
+<div id="emailAddressLoginError" class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4" hidden>
+    <strong>Error!</strong> Email Address cannot be left empty.
+    <button id="emailAddressLoginErrorClose" type="button" class="btn-close"></button>
+</div>
+
+<div id="emailAddressLoginRegexError" class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4" hidden>
+    <strong>Error!</strong> Email Address format is not valid.
+    <button id="emailAddressLoginRegexClose" type="button" class="btn-close"></button>
+</div>
+
+<div id="passwordLoginError" class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4" hidden>
+    <strong>Error!</strong> Password cannot be left empty.
+    <button id="passwordLoginClose" type="button" class="btn-close"></button>
+</div>
