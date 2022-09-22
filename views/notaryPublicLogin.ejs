@@ -13,28 +13,10 @@
                         <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
                     </ul>
 
-
-                    <div class="dropdown text-end">
-                        
-                        <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-							aria-expanded="false">
-							Hello, Daven Santana
-						</a> -->
-                        
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Dashboard</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
-                        </ul>
-                    </div>
-
                     <div class="text-end">
-                        <a class="btn btn-outline-light me-2" href="/login" role="button">Login</a>
+                        <a class="btn btn-outline-light me-2" href="/userLogin" role="button">Login</a>
                         <a class="btn btn-info" href="/signup" role="button">Signup</a>
                     </div>
-
 
                 </div>
             </div>
@@ -48,7 +30,7 @@
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body p-5">
-                                <h2 class="text-uppercase text-center mb-5">Login to your account</h2>
+                                <h2 class="text-uppercase text-center mb-5">Notary Public Login</h2>
 
                                 <form id="loginForm" method="post" action="/login">
 
@@ -65,10 +47,12 @@
                                     <div class="d-flex justify-content-center">
                                         <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
                                     </div>
-                                    
 
                                     <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="/signup" class="fw-bold text-body">Sign-up here</a></p>
 
+                                    <hr class="my-4">
+
+                                    <p class="text-center text-muted mt-4 mb-0">Not a Notary Public? <a href="/userLogin" class="fw-bold text-body">Login here</a></p>
                                 </form>
                             </div>
                         </div>

@@ -1,7 +1,8 @@
 const express = require("express");
 
 const signupRoute = require("./signup");
-const loginRoute = require("./login");
+const userLoginRoute = require("./userLogin");
+const notaryPublicLoginRoute = require("./notaryPublicLogin");
 const notaryPublicDashboardRoute = require("./notaryPublicDashboard");
 const userDashboardRoute = require("./userDashboard");
 
@@ -13,7 +14,8 @@ module.exports = () => {
 	});
 
 	router.use("/signup", signupRoute());
-	router.use("/login", loginRoute());
+	router.use("/userLogin", userLoginRoute());
+	router.use("/notaryPublicLogin", notaryPublicLoginRoute());
 	router.use("/notaryPublicDash", notaryPublicDashboardRoute());
 	router.use("/userDash", userDashboardRoute());
 

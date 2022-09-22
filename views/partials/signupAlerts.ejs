@@ -1,4 +1,9 @@
-
+<% if(success === "false") { %>
+    <div class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4">
+        <strong>Error!</strong> Email Address already exists.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<% } %>
 
 <div id="firstNameError" class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4" hidden>
     <strong>Error!</strong> First Name cannot be left empty.
