@@ -26,6 +26,7 @@ const userSchema = new Schema({
     },
     document: [{
     documentName: {type: String},
+	documentBuffer: {type: Buffer},
     documentCompleted: {type: Boolean, default: false}
     }]
 });

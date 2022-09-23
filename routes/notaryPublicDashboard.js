@@ -11,7 +11,6 @@ module.exports = () => {
 	return router;
 };
 
-
 function redirectIfUserLoggedIn(req, res, next) {
 	
 	if(req.user) {
@@ -22,10 +21,8 @@ function redirectIfUserLoggedIn(req, res, next) {
 };
 
 function redirectIfNotaryPublicNotLoggedIn(req, res, next) {
-
-	if(req.user) {
-		if(!req.user.notaryPublic) return res.redirect("/notaryPublicLogin");
-	}
+	
+	if (!req.user) return res.redirect("/notaryPublicLogin?loggedIn=false");
 
 	return next();
 };

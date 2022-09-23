@@ -1,0 +1,21 @@
+<% if (error == "noFile") { %>
+    <div class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4">
+        <strong>Error!</strong> You must submit a file.
+        <button type="button" class="btn-close"></button>
+    </div>
+<% } else if (error == "notPDF") { %>
+    <div class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4">
+        <strong>Error!</strong> The file must be a PDF.
+        <button type="button" class="btn-close"></button>
+    </div>
+<% } %>
+
+<div id="userUploadError" class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4" hidden>
+    <strong>Error!</strong> You must submit a file.
+    <button id="userUploadErrorClose" type="button" class="btn-close"></button>
+</div>
+
+<div id="userUploadExtensionError" class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4" hidden>
+    <strong>Error!</strong> The file must be a PDF.
+    <button id="userUploadExtensionErrorClose" type="button" class="btn-close"></button>
+</div>
