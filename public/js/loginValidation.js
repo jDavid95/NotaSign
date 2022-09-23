@@ -7,7 +7,7 @@ const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4}
 loginForm.addEventListener("submit", (e) => {
 
     // Remove all previous errors
-    
+
     document.getElementById("emailAddressLoginError").setAttribute("hidden", "hidden");
     document.getElementById("emailAddressLoginRegexError").setAttribute("hidden", "hidden");
     document.getElementById("passwordLoginError").setAttribute("hidden", "hidden");

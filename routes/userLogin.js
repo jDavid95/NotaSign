@@ -14,11 +14,19 @@ module.exports = () => {
 };
 
 function redirectIfUserLoggedIn(req, res, next) {
-	if (req.user) return res.redirect('/userDashboard');
+	
+	if(req.user) {
+		if(!req.user.notaryPublic) return res.redirect("/userDashboard");
+	}
+
 	return next();
 };
 
 function redirectIfNotaryPublicLoggedIn(req, res, next) {
-	if (req.notaryPublic) return res.redirect('/notaryPublicDashboard');
+
+	if(req.user) {
+		if(req.user.notaryPublic) return res.redirect("/notaryPublicDashboard");
+	}
+
 	return next();
 };

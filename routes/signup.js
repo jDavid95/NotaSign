@@ -86,12 +86,21 @@ module.exports = () => {
 function capitalizeFirstLetter(string) {
 	return string[0].toUpperCase() + string.slice(1).toLowerCase();
 }
+
 function redirectIfUserLoggedIn(req, res, next) {
-	if (req.user) return res.redirect('/userDashboard');
+	
+	if(req.user) {
+		if(!req.user.notaryPublic) return res.redirect("/userDashboard");
+	}
+
 	return next();
 };
 
 function redirectIfNotaryPublicLoggedIn(req, res, next) {
-	if (req.notaryPublic) return res.redirect('/notaryPublicDashboard');
+
+	if(req.user) {
+		if(req.user.notaryPublic) return res.redirect("/notaryPublicDashboard");
+	}
+
 	return next();
 };

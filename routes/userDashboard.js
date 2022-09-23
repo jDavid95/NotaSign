@@ -1,10 +1,13 @@
 const express = require("express");
 
+
 const router = express.Router();
 
 module.exports = () => {
 	router.get("/", redirectIfUserNotLoggedIn, redirectIfNotaryPublicLoggedIn, (req, res) => {
 		let fullName = req.user.firstName + " " + req.user.lastName;
+		// console.log(req.user);
+		// console.log(req.notaryPublic);
 		res.render("userDashboard", { fullName: fullName });
 	});
 
@@ -17,6 +20,12 @@ function redirectIfUserNotLoggedIn(req, res, next) {
 };
 
 function redirectIfNotaryPublicLoggedIn(req, res, next) {
-	if (req.notaryPublic) return res.redirect("/notaryPublicDashboard");
+	
+	if(req.user) {
+		if(req.user.notaryPublic) return res.redirect("/notaryPublicDashboard");
+	}
+
 	return next();
 };
+
+

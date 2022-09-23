@@ -7,8 +7,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const database = require("./lib/database");
 const routes = require("./routes");
-const userAuth = require("./lib/userAuth");
-const notaryPublicAuth = require("./lib/notaryPublicAuth")
+const auth = require("./lib/auth");
 require("dotenv").config();
 
 const app = express();
@@ -25,26 +24,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: false, store: MongoStore.create({ mongoUrl: process.env.DATABASE_LOGIN }) }));
 
-app.use(userAuth.initialize);
-app.use(userAuth.session);
-app.use(userAuth.setUser);
-
-app.use(notaryPublicAuth.initialize);
-app.use(notaryPublicAuth.session);
-app.use(notaryPublicAuth.setNotaryPublic);
+app.use(auth.initialize);
+app.use(auth.session);
+app.use(auth.setUser);
 
 app.use(routes());
 
 app.use(function(req, res) {
 	res.status(404);
 
+	let fullName = ""
+
 	if(req.user) {
 		fullName = req.user.firstName + " " + req.user.lastName;
-	} else if(req.notaryPublic) {
-		fullName = req.notaryPublic.firstName + " " + req.notaryPublic.lastName;
 	}
 
-	return res.render('404', { userLoggedIn: req.user, notaryPublicLoggedIn: req.notaryPublic, fullName: fullName });
+	return res.render('404', { userLoggedIn: req.user, fullName: fullName });
 });
 
 app.listen(port, () =>

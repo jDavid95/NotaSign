@@ -1,5 +1,6 @@
 const express = require("express");
 
+
 const signupRoute = require("./signup");
 const userLoginRoute = require("./userLogin");
 const notaryPublicLoginRoute = require("./notaryPublicLogin");
@@ -15,11 +16,9 @@ module.exports = () => {
 
 		if(req.user) {
 			fullName = req.user.firstName + " " + req.user.lastName;
-		} else if(req.notaryPublic) {
-			fullName = req.notaryPublic.firstName + " " + req.notaryPublic.lastName;
-		}
+		} 
 
-		res.render("index", { userLoggedIn: req.user, notaryPublicLoggedIn: req.notaryPublic, fullName: fullName });
+		res.render("index", { userLoggedIn: req.user, fullName: fullName });
 	});
 
 	router.get("/logout", (req, res, next) => {
