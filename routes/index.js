@@ -10,9 +10,16 @@ const router = express.Router();
 
 module.exports = () => {
 	router.get("/", (req, res) => {
-		console.log(req.user);
-		console.log(req.notaryPublic);
-		res.render("index");
+		
+		let fullName = "";
+
+		if(req.user) {
+			fullName = req.user.firstName + " " + req.user.lastName;
+		} else if(req.notaryPublic) {
+			fullName = req.notaryPublic.firstName + " " + req.notaryPublic.lastName;
+		}
+
+		res.render("index", { userLoggedIn: req.user, notaryPublicLoggedIn: req.notaryPublic, fullName: fullName });
 	});
 
 	router.get("/logout", (req, res, next) => {

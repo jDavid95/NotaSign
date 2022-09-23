@@ -12,6 +12,13 @@
     </div>
 <% } %>
 
+<% if(loggedIn === "false") { %>
+    <div class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4">
+        <strong>Error!</strong> You must be logged in to do that.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<% } %>
+
 <div id="emailAddressLoginError" class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4" hidden>
     <strong>Error!</strong> Email Address cannot be left empty.
     <button id="emailAddressLoginErrorClose" type="button" class="btn-close"></button>

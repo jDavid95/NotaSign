@@ -5,7 +5,7 @@ const router = express.Router();
 
 module.exports = () => {
 	router.get("/", redirectIfUserLoggedIn, redirectIfNotaryPublicLoggedIn, (req, res) => {
-		res.render("userLogin", { success: req.query.success });
+		res.render("userLogin", { success: req.query.success, loggedIn: req.query.loggedIn });
 	});
 
 	router.post("/", passport.authenticate("userLocal", { successRedirect: "/userDashboard", failureRedirect: "/userLogin?success=false" }));

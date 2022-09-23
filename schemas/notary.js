@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const notarySchema = new Schema({
-    firstname: {
+    firstName: {
 	type: String,
 	required: true
     },
-    lastname: {
+    lastName: {
 	type: String,
 	required: true
     },
-    email: {
+    emailAddress: {
 	type: String,
 	required: true,
 	unique: true
@@ -18,8 +18,7 @@ const notarySchema = new Schema({
     password: {
 	type: String,
 	required: true
-    },
-    completed: false
+    }
 });
 
-module.exports = mongoose.model('notary', notarySchema);
+module.exports = mongoose.model("Notary", notarySchema);

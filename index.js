@@ -11,8 +11,6 @@ const userAuth = require("./lib/userAuth");
 const notaryPublicAuth = require("./lib/notaryPublicAuth")
 require("dotenv").config();
 
-
-
 const app = express();
 const port = 3000;
 
@@ -39,7 +37,14 @@ app.use(routes());
 
 app.use(function(req, res) {
 	res.status(404);
-	return res.render('404', { userLoggedIn: req.user, notaryPublicLoggedIn: req.notaryPublic });
+
+	if(req.user) {
+		fullName = req.user.firstName + " " + req.user.lastName;
+	} else if(req.notaryPublic) {
+		fullName = req.notaryPublic.firstName + " " + req.notaryPublic.lastName;
+	}
+
+	return res.render('404', { userLoggedIn: req.user, notaryPublicLoggedIn: req.notaryPublic, fullName: fullName });
 });
 
 app.listen(port, () =>
