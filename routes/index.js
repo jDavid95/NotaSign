@@ -13,12 +13,16 @@ module.exports = () => {
 	router.get("/", (req, res) => {
 		
 		let fullName = "";
+		let notaryPublicLoggedIn = false;
 
 		if(req.user) {
 			fullName = req.user.firstName + " " + req.user.lastName;
+			if(req.user.notaryPublic) {
+				notaryPublicLoggedIn = true;
+			}
 		} 
 
-		res.render("index", { userLoggedIn: req.user, fullName: fullName });
+		res.render("index", { anyUserLoggedIn: req.user, notaryPublicLoggedIn: notaryPublicLoggedIn, fullName: fullName });
 	});
 
 	router.get("/logout", (req, res, next) => {

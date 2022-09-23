@@ -34,12 +34,16 @@ app.use(function(req, res) {
 	res.status(404);
 
 	let fullName = ""
+	let notaryPublicLoggedIn = false;
 
 	if(req.user) {
 		fullName = req.user.firstName + " " + req.user.lastName;
-	}
+		if(req.user.notaryPublic) {
+			notaryPublicLoggedIn = true;
+		}
+	} 
 
-	return res.render('404', { userLoggedIn: req.user, fullName: fullName });
+	return res.render('404', { anyUserLoggedIn: req.user, notaryPublicLoggedIn: notaryPublicLoggedIn, fullName: fullName });
 });
 
 app.listen(port, () =>

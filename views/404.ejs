@@ -5,7 +5,7 @@
 
     <body>
 
-        <% if (!userLoggedIn) { %>
+        <% if (!anyUserLoggedIn) { %>
             
             <header class="p-3 bg-dark text-white">
                 <div class="container">
@@ -24,7 +24,7 @@
                 </div>
             </header>
 
-        <% } else if (userLoggedIn) { %>
+        <% } else if(!notaryPublicLoggedIn) { %>
 
             <header class="p-3 bg-dark text-white">
                 <div class="container">
@@ -49,8 +49,8 @@
                 </div>
             </header>
 
-        <% } else if (notaryPublicLoggedIn) {%>
-            
+        <% } else { %>
+
             <header class="p-3 bg-dark text-white">
                 <div class="container">
                     <div class="d-flex flex-wrap align-items-center justify-content-center ">
