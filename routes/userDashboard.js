@@ -1,10 +1,13 @@
 const express = require("express");
+const User = require("../schemas/user");
 
 const router = express.Router();
 
 module.exports = () => {
 	router.get("/", redirectIfUserNotLoggedIn, redirectIfNotaryPublicLoggedIn, (req, res) => {
 		let fullName = req.user.firstName + " " + req.user.lastName;
+		// let userDashboardTable = createUserDashboardTable(req.user);
+
 		res.render("userDashboard", { fullName: fullName });
 	});
 
@@ -23,4 +26,16 @@ function redirectIfNotaryPublicLoggedIn(req, res, next) {
 	}
 
 	return next();
+};
+
+
+function createUserDashboardTable(user) {
+
+	let table = ""
+
+	user.document.forEach(element => {
+		let row = `<a class="Styling here"href="/pdf/${element.documentName} target="_blank">${element.documentName}</a>`
+	});
+	let row = `<a href>`
+
 };
