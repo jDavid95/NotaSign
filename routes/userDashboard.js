@@ -1,4 +1,7 @@
 const express = require("express");
+const multerMiddleware = require("./multer");
+const User = require("../schemas/user");
+const crypto = require("crypto");
 
 const router = express.Router();
 
@@ -7,8 +10,27 @@ module.exports = () => {
 		let fullName = req.user.firstName + " " + req.user.lastName;
 		let userDashboardTable = createUserDashboardTable(req.user);
 
-		res.render("userDashboard", { fullName: fullName, table: userDashboardTable });
+		res.render("userDashboard", { fullName: fullName, table: userDashboardTable, error: req.query.error });
 	});
+
+	router.post("/userUploadPDF", multerMiddleware.upload.single("pdfFile"), multerMiddleware.checkForPDF, async (req, res, next) => {
+
+        try {
+
+            if(!req.file) res.redirect("/userUploadPDF?error=noFile");
+
+            let newPDFName = crypto.randomBytes(5).toString("hex") + ".pdf";
+
+            const user = await User.findByIdAndUpdate(req.user._id, {$push: {"document": {documentName: newPDFName, documentBuffer: req.file.buffer}}})
+
+            const savedUser = await user.save();
+
+            if(savedUser) return res.redirect("/userDashboard");
+            return next(new Error('Failed to save user for unknown reasons'));
+        } catch (err) {
+            return next(err);
+        }
+    });
 
 	return router;
 };
@@ -26,7 +48,6 @@ function redirectIfNotaryPublicLoggedIn(req, res, next) {
 
 	return next();
 };
-
 
 function createUserDashboardTable(user) {
 

@@ -3,6 +3,8 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
+	<title>NotaSign User Dashboard</title>
+
 	</head>
 
 	<body>
@@ -13,7 +15,7 @@
 
 					<ul class="nav col-12 col-sm-auto me-sm-auto mb-2 justify-content-center mb-md-0">
 						<li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-                        <li><a href="/userUploadPDF" class="nav-link px-2 text-secondary">Upload</a></li>
+						<li><a href="/userDashboard" class="nav-link px-2 text-white">Dashboard</a></li>
 					</ul>
 					
 					<div class="dropdown text-end">
@@ -31,6 +33,8 @@
 			</div>
 		</header>
 
+		<%- include ('./partials/userUploadAlerts.ejs') %>
+
 		<div class="container">
 			<div class="row profile">
 				<div class="col-md-3">
@@ -42,6 +46,23 @@
 						</div>
 						<!-- END SIDEBAR USER TITLE -->
 						<!-- SIDEBAR MENU -->
+						<div class="profile-usermenu">
+
+							<h2 class="profile-usertitle-name text-center mb-4">Submit a PDF</h2>
+							<form id="uploadForm" method="post" action="/userDashboard/userUploadPDF" enctype="multipart/form-data">
+
+                                    
+								<div class="mx-auto form-outline mb-4 w-75">
+									<input style="font-size: 15px;" type="file" id="pdfFile" name = "pdfFile" class="form-control form-control-md" />
+								</div>
+								
+
+								<div class="d-flex justify-content-center">
+									<button type="submit" class="btn btn-success btn-block btn-md gradient-custom-4 text-body text-center w-75">Upload</button>
+								</div>
+
+							</form>
+						  </div>
 						
 					</div>
 				</div>
@@ -92,6 +113,6 @@
 		<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
 		<script src="../CSS/pagination.js"></script>
-
+		<script src="../public/js/uploadPDFValidation.js"></script>
 
 		<%- include ('./partials/footer.ejs') %>

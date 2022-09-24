@@ -12,7 +12,6 @@ const notaryPublicDashboardRoute = require("./notaryPublicDashboard");
 // User Routes
 
 const userDashboardRoute = require("./userDashboard");
-const userUploadPDFRoute = require("./userUploadPDF");
 
 // Pdf Route
 
@@ -50,7 +49,6 @@ module.exports = () => {
 	router.use("/notaryPublicLogin", notaryPublicLoginRoute());
 	router.use("/notaryPublicDashboard", notaryPublicDashboardRoute());
 	router.use("/userDashboard", userDashboardRoute());
-	router.use("/userUploadPDF", userUploadPDFRoute());
 	router.use("/pdf", viewPDFRoute());
 
 	return router;
