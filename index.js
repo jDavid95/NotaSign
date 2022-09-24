@@ -13,7 +13,7 @@ require("dotenv").config();
 const app = express();
 const port = 3000;
 
-app.use(helmet({ contentSecurityPolicy: false }));
+app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
 
 app.use(express.static(path.join(__dirname, './')));
 app.set("view engine", "ejs");
@@ -29,6 +29,8 @@ app.use(auth.session);
 app.use(auth.setUser);
 
 app.use(routes());
+
+// app.use('/pdf/:pdfName', express.static(__dirname + '/HTML/notaryProfile.html'));
 
 app.use(function(req, res) {
 	res.status(404);
