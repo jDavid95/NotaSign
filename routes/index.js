@@ -1,5 +1,6 @@
 const express = require("express");
-
+const path = require("path");
+const fsExtra = require('fs-extra');
 
 const signupRoute = require("./signup");
 const userLoginRoute = require("./userLogin");
@@ -36,10 +37,14 @@ module.exports = () => {
 	});
 
 	router.get("/logout", (req, res, next) => {
+		
+		let pathToPDF = path.join(__dirname, "..", `/pdf`)
+
 		req.logout(function (err) {
 			if (err) {
 				return next(err);
 			}
+			fsExtra.emptyDirSync(pathToPDF);
 			res.redirect("/");
 		});
 	});

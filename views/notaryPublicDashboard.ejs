@@ -32,6 +32,8 @@
 			</div>
 		</header>
 
+		<%- include ('./partials/notaryPublicDashboardAlerts.ejs') %>
+
 		<div class="container">
 			<div class="row profile">
 				<div class="col-md-3">
@@ -94,5 +96,11 @@
 
 		<script src="../CSS/pagination.js"></script>
 		<script src="../public/js/deletePDFButton.js"></script>
+
+		<script>
+			document.getElementById("alertClose").addEventListener("click", () => {
+				document.location.href = "/notaryPublicDashboard";
+    		});
+		</script>
 		
 		<%- include ('./partials/footer.ejs') %>

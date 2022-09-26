@@ -10,7 +10,7 @@ module.exports = () => {
 		let fullName = req.user.firstName + " " + req.user.lastName;
 		let userDashboardTable = createUserDashboardTable(req.user);
 
-		res.render("userDashboard", { fullName: fullName, table: userDashboardTable, error: req.query.error });
+		res.render("userDashboard", { fullName: fullName, table: userDashboardTable, error: req.query.error, login: req.query.login, pdf: req.query.pdf });
 	});
 
 	router.post("/userUploadPDF", multerMiddleware.upload.single("pdfFile"), multerMiddleware.checkForPDF, async (req, res, next) => {
@@ -25,7 +25,7 @@ module.exports = () => {
 
             const savedUser = await user.save();
 
-            if(savedUser) return res.redirect("/userDashboard");
+            if(savedUser) return res.redirect("/userDashboard?pdf=successfulUpload");
             return next(new Error('Failed to save user for unknown reasons'));
         } catch (err) {
             return next(err);

@@ -8,7 +8,7 @@ module.exports = () => {
 		res.render("notaryPublicLogin", { success: req.query.success, loggedIn: req.query.loggedIn });
 	});
 
-	router.post("/", passport.authenticate("notaryPublicLocal", { successRedirect: "/notaryPublicDashboard", failureRedirect: "/notaryPublicLogin?success=false" }));
+	router.post("/", passport.authenticate("notaryPublicLocal", { successRedirect: "/notaryPublicDashboard?login=success", failureRedirect: "/notaryPublicLogin?success=false" }));
 
 	return router;
 };

@@ -1,4 +1,5 @@
 const { table } = require("console");
+const { query } = require("express");
 const express = require("express");
 const User = require("../schemas/user");
 
@@ -8,7 +9,7 @@ module.exports = () => {
 	router.get("/", redirectIfUserLoggedIn, redirectIfNotaryPublicNotLoggedIn, async (req, res) => {
 		let fullName = req.user.firstName + " " + req.user.lastName;
 		let notaryPublicDashboardTable = await createNotaryPublicDashboardTable();
-		res.render("notaryPublicDashboard",  { fullName: fullName, table: notaryPublicDashboardTable});
+		res.render("notaryPublicDashboard",  { fullName: fullName, table: notaryPublicDashboardTable, login: req.query.login, pdf: req.query.pdf });
 	});
 
 	return router;

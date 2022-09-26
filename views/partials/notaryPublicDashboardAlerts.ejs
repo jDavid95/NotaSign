@@ -1,0 +1,20 @@
+<% if(login === "success") { %>
+    <div class="text-center mx-auto alert alert-success alert-dismissible fade show mt-3 col-4">
+        <strong>Success!</strong> You have been succesfully logged in!
+        <button id="alertClose" type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<% } %>
+
+<% if(pdf === "dne") { %>
+    <div class="text-center mx-auto alert alert-danger alert-dismissible fade show mt-3 col-4">
+        <strong>Error!</strong> This PDF does not exist!
+        <button id="alertClose" type="button" class="btn-close"></button>
+    </div>
+<% } %>
+
+<% if(pdf === "successfulDelete") { %>
+    <div class="text-center mx-auto alert alert-success alert-dismissible fade show mt-3 col-4">
+        <strong>Success!</strong> The PDF was successfully deleted!
+        <button id="alertClose" type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<% } %>

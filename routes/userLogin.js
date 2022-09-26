@@ -8,7 +8,7 @@ module.exports = () => {
 		res.render("userLogin", { success: req.query.success, loggedIn: req.query.loggedIn });
 	});
 
-	router.post("/", passport.authenticate("userLocal", { successRedirect: "/userDashboard", failureRedirect: "/userLogin?success=false" }));
+	router.post("/", passport.authenticate("userLocal", { successRedirect: "/userDashboard?login=success", failureRedirect: "/userLogin?success=false" }));
 
 	return router;
 };

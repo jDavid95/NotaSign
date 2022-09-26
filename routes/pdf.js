@@ -27,7 +27,6 @@ module.exports = () => {
             let user = await User.findOne({document: { $elemMatch: {documentName: pdfName}}}).exec();
             
             if(!user) {
-                console.log("AQUI ESTAMOS")
                 res.redirect("/notaryPublicDashboard?pdf=dne");
             } else {
                 let document = findDocumentInUser(user, pdfName);
@@ -46,10 +45,9 @@ module.exports = () => {
             let document = findDocumentInUser(req.user, pdfName);
 
             if(document) {
-                console.log("in here")
                 const user = await User.findOneAndUpdate({document: { $elemMatch: {documentName: pdfName}}}, {$pull: {"document": {documentName: pdfName}}}).exec();
                 const savedUser = await user.save();
-                if(savedUser) return res.redirect("/userDashboard?pdf=success");
+                if(savedUser) return res.redirect("/userDashboard?pdf=successfulDelete");
                 return next(new Error('Failed to save user for unknown reasons'));
             }
             
@@ -60,7 +58,7 @@ module.exports = () => {
             if(possibleUserWithDocument){
                 const user = await User.findOneAndUpdate({document: { $elemMatch: {documentName: pdfName}}}, {$pull: {"document": {documentName: pdfName}}}).exec();
                 const savedUser = await user.save();
-                if(savedUser) return res.redirect("/notaryPublicDashboard?pdf=success");
+                if(savedUser) return res.redirect("/notaryPublicDashboard?pdf=successfulDelete");
             }
         }
 

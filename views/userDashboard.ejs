@@ -34,6 +34,7 @@
 		</header>
 
 		<%- include ('./partials/userUploadAlerts.ejs') %>
+		<%- include ('./partials/userDashboardAlerts.ejs') %>
 
 		<div class="container">
 			<div class="row profile">
@@ -114,5 +115,11 @@
 		<script src="../CSS/pagination.js"></script>
 		<script src="../public/js/uploadPDFValidation.js"></script>
 		<script src="../public/js/deletePDFButton.js"></script>
+
+		<script>
+			document.getElementById("alertClose").addEventListener("click", () => {
+				document.location.href = "/userDashboard";
+    		});
+		</script>
 	
 		<%- include ('./partials/footer.ejs') %>
