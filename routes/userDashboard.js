@@ -71,7 +71,7 @@ function createUserDashboardTable(user) {
 			<td>${document.documentName}</td>
 			<td class="${documentCompletedClass} text-center">${documentCompleted}</td>
 			<td class="text-center"><a href="/pdf/${document.documentName}" target="_blank" class="btn btn-sm rounded-0 bi bi-filetype-pdf pe-5 ps-5 me-3" type="button"></a></td>
-			<td class="text-center"><button class="btn btn-sm btn-danger rounded-0 bi bi-trash me-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></button></td>
+			<td class="text-center"><button id="${document.documentName}" class="btn btn-sm btn-danger rounded-0 bi bi-trash me-3" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"></button></td>
 		</tr>`
 	});
 

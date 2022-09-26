@@ -36,6 +36,41 @@ module.exports = () => {
         }
 	});
 
+    router.get("/deletePDF/:pdfName", redirectIfAnyUserNotLoggedIn, async (req, res) => { 
+        
+        let pdfName = req.params.pdfName;
+
+        if(!req.user.notaryPublic) {
+		
+            console.log("Not in here")
+            let document = findDocumentInUser(req.user, pdfName);
+
+            if(document) {
+                const user = await User.findOneAndUpdate({documentName: { $elemMatch: {documentName: pdfName}}}, {$pull: {"document": {documentName: pdfName}}}).exec();
+                const savedUser = await user.save();
+                if(savedUser) return res.redirect("/userDashboard?pdf=success");
+                return next(new Error('Failed to save user for unknown reasons'));
+            }
+            
+        } else {
+
+            let findIfDocumentExists = await User.findOne({documentName: { $elemMatch: {documentName: pdfName}}}).exec();
+            let document = findDocumentInUser(findIfDocumentExists, pdfName);
+
+            if(document){
+                const user = await User.findOneAndUpdate({documentName: { $elemMatch: {documentName: pdfName}}}, {$pull: {"document": {documentName: pdfName}}}).exec();
+                const savedUser = await user.save();
+                if(savedUser) return res.redirect("/notaryPublicDashboard?pdf=success");
+            }
+        }
+
+        if(!req.user.notaryPublic) {
+            res.redirect("/userDashboard?pdf=noAccess");
+        } else {
+            res.redirect("/notaryPublicDashboard?pdf=dne");
+        }
+    });
+
 	return router;
 };
 

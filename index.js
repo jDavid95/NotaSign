@@ -15,7 +15,7 @@ const port = 3000;
 
 app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
 
-app.use(express.static(path.join(__dirname, './')));
+app.use(express.static(path.join(__dirname, '/')));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -30,8 +30,6 @@ app.use(auth.setUser);
 
 app.use(routes());
 
-// app.use('/pdf/:pdfName', express.static(__dirname + '/HTML/notaryProfile.html'));
-
 app.use(function(req, res) {
 	res.status(404);
 
@@ -45,7 +43,7 @@ app.use(function(req, res) {
 		}
 	} 
 
-	return res.render('404', { anyUserLoggedIn: req.user, notaryPublicLoggedIn: notaryPublicLoggedIn, fullName: fullName });
+	return res.render("404", { anyUserLoggedIn: req.user, notaryPublicLoggedIn: notaryPublicLoggedIn, fullName: fullName });
 });
 
 app.listen(port, () =>
