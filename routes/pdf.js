@@ -24,12 +24,13 @@ module.exports = () => {
             
         } else {
 
-            let user = await User.findOne({documentName: { $elemMatch: {documentName: pdfName}}}).exec();
-            let document = findDocumentInUser(user, pdfName);
+            let user = await User.findOne({document: { $elemMatch: {documentName: pdfName}}}).exec();
             
-            if(!document) {
+            if(!user) {
+                console.log("AQUI ESTAMOS")
                 res.redirect("/notaryPublicDashboard?pdf=dne");
             } else {
+                let document = findDocumentInUser(user, pdfName);
                 generatePDF(pdfName, document.documentBuffer);
                 res.sendFile(path.join(__dirname, "..", `/pdf/${pdfName}`));
             }
@@ -42,11 +43,11 @@ module.exports = () => {
 
         if(!req.user.notaryPublic) {
 		
-            console.log("Not in here")
             let document = findDocumentInUser(req.user, pdfName);
 
             if(document) {
-                const user = await User.findOneAndUpdate({documentName: { $elemMatch: {documentName: pdfName}}}, {$pull: {"document": {documentName: pdfName}}}).exec();
+                console.log("in here")
+                const user = await User.findOneAndUpdate({document: { $elemMatch: {documentName: pdfName}}}, {$pull: {"document": {documentName: pdfName}}}).exec();
                 const savedUser = await user.save();
                 if(savedUser) return res.redirect("/userDashboard?pdf=success");
                 return next(new Error('Failed to save user for unknown reasons'));
@@ -54,11 +55,10 @@ module.exports = () => {
             
         } else {
 
-            let findIfDocumentExists = await User.findOne({documentName: { $elemMatch: {documentName: pdfName}}}).exec();
-            let document = findDocumentInUser(findIfDocumentExists, pdfName);
+            let possibleUserWithDocument = await User.findOne({document: { $elemMatch: {documentName: pdfName}}}).exec();
 
-            if(document){
-                const user = await User.findOneAndUpdate({documentName: { $elemMatch: {documentName: pdfName}}}, {$pull: {"document": {documentName: pdfName}}}).exec();
+            if(possibleUserWithDocument){
+                const user = await User.findOneAndUpdate({document: { $elemMatch: {documentName: pdfName}}}, {$pull: {"document": {documentName: pdfName}}}).exec();
                 const savedUser = await user.save();
                 if(savedUser) return res.redirect("/notaryPublicDashboard?pdf=success");
             }
